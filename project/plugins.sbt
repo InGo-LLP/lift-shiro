@@ -1,3 +1,8 @@
-resolvers += "web-plugin.repo" at "http://siasia.github.com/maven2"    
+resolvers += Resolver.url(
+  "bintray-sbt-plugin-releases",
+    url("http://dl.bintray.com/content/sbt/sbt-plugin-releases"))(
+        Resolver.ivyStylePatterns)
 
-libraryDependencies <+= sbtVersion(v => "com.github.siasia" %% "xsbt-web-plugin" % ("0.12.0-0.2.11.1"))
+addSbtPlugin("me.lessis" % "bintray-sbt" % "0.1.2")
+
+addSbtPlugin("com.earldouglas" % "xsbt-web-plugin" % "1.0.0")
