@@ -1,10 +1,10 @@
 organization := "eu.getintheloop"
 
-version      := "0.0.9"
+version      := "0.0.9-ingo2"
 
 name 				 := "lift-shiro"
 
-scalaVersion := "2.10.0"
+scalaVersion := "2.12.2"
 
 resolvers ++= Seq(
       "CB Central Mirror" at "http://repo.cloudbees.com/content/groups/public",
@@ -17,15 +17,14 @@ scalacOptions <<= scalaVersion map { v: String =>
       val opts = "-deprecation" :: "-unchecked" :: Nil
       if (v.startsWith("2.9.")) opts else opts ++ ( "-language:implicitConversions" :: "-language:postfixOps" :: Nil)}
 
-crossScalaVersions := Seq("2.10.4", "2.11.5")
+crossScalaVersions := Seq("2.11.11", "2.12.2")
 
 licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0.html"))
 
 seq(bintrayPublishSettings: _*)
 
 libraryDependencies ++= Seq(
-  "org.apache.shiro"  % "shiro-core"          % "1.2.3",
-  "org.apache.shiro"  % "shiro-web"           % "1.2.3",
-  "commons-beanutils" % "commons-beanutils"   % "1.9.2",
-  "net.liftweb" 			%% "lift-webkit" 				% "2.6"			% "provided"
+  "org.apache.shiro"  % "shiro-core"          % "1.4.0",
+  "org.apache.shiro"  % "shiro-web"           % "1.4.0",
+  "net.liftweb" 			%% "lift-webkit" 				% "3.0.1"			% "provided"
 )

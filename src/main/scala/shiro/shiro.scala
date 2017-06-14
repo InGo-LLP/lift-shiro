@@ -10,15 +10,13 @@ import org.apache.shiro.config.IniSecurityManagerFactory
 import org.apache.shiro.mgt.SecurityManager
 
 object Shiro extends Factory {
-  def init(factory: ShiroFactory[SecurityManager]){
-    
+  def init(){
+
     import Utils._
     import shiro.snippet._
-    
-    SecurityUtils.setSecurityManager(factory.getInstance);
-    
+
     LiftRules.loggedInTest = Full(() => isAuthenticated)
-    
+
     LiftRules.snippetDispatch.append {
       case "has_role" | "hasRole" | "HasRole" => HasRole
       case "lacks_role" | "lacksRole" | "LacksRole" => LacksRole
@@ -31,21 +29,17 @@ object Shiro extends Factory {
       case "is_not_authenticated" | "isNotAuthenticated" | "IsNotAuthenticated" => IsNotAuthenticated
     }
   }
-  
-  def init(){ 
-    init(new IniSecurityManagerFactory("classpath:shiro.ini")) 
-  }
-  
-  /** 
+
+  /**
    * Speedy setup helpers
    */
   import net.liftweb.sitemap.Menu
   import shiro.sitemap.Locs
-  
+
   def menus: List[Menu] = sitemap
   private lazy val sitemap = List(Locs.logoutMenu)
-  
-  /** 
+
+  /**
    * Configurations
    */
   type Path = List[String]
@@ -58,4 +52,3 @@ object Shiro extends Factory {
 object LoginRedirect extends SessionVar[Box[String]](Empty){
   override def __nameSalt = Helpers.nextFuncName
 }
-
